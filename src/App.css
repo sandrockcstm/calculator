@@ -8,6 +8,14 @@ body {
   border-radius: 2px;
 }
 
+#formula {
+  text-align: right;
+  background-color: purple;
+  color: orange;
+  border-radius: 2px;
+  border-bottom: 2px solid black;
+}
+
 .btn {
   border: 1px solid;
   border-color: black;

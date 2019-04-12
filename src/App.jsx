@@ -2,35 +2,54 @@ import React, { Component } from "react";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
+const operators = /[+\-x/]/;
+
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      display: "0"
+      display: "0",
+      formula: "Push a button"
     };
 
     this.handleInput = this.handleInput.bind(this);
     this.handleClear = this.handleClear.bind(this);
   }
 
+  //Logic for display
   handleInput(x) {
+    //Doesn't allow for multiple starting 0s
     if (this.state.display === 0 && x === "0") {
       this.setState({ display: "0" });
       return;
-    } else if (x !== 0 && x !== "." && this.state.display === "0") {
+    }
+    //Allows for operators to follow a zero
+    else if (x.match(operators)) {
+      this.setState({ display: this.state.display + x });
+    }
+    //Removes the default 0 if preceding conditions aren't met
+    else if (x !== 0 && x !== "." && this.state.display === "0") {
       this.setState({ display: x });
-    } else if (this.state.display.match(/\.{1,}/g) && x == ".") {
+    }
+    //Doesn't allow for consecutive decimals
+    else if (this.state.display.match(/\.{1,}/g) && x == ".") {
       return;
-    } else {
+    }
+    //Otherwise concat x to the string
+    else {
       this.setState({ display: this.state.display + x });
       return;
     }
   }
 
   handleClear() {
-    this.setState({ display: 0 });
+    this.setState({ display: "0", formula: "0" });
     return;
+  }
+
+  handleFormula(y) {
+    this.setState({ formula: `{$formula} {y}` });
   }
 
   render() {
@@ -38,6 +57,11 @@ class App extends Component {
       <React.Fragment>
         <div className="col-md-6" />
         <div className="container col-md-3">
+          <div className="row">
+            <div id="formula" className="container-fluid">
+              {this.state.formula}
+            </div>
+          </div>
           <div className="row">
             <div id="display" className="container-fluid">
               {this.state.display}
