@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-const operators = /[+\-x/]/;
+const operators = /[+\-x/]/g;
+const letters = /[a-z]/i;
+const letterX = /x/gi;
 
 class App extends Component {
   constructor(props) {
@@ -15,12 +17,22 @@ class App extends Component {
 
     this.handleInput = this.handleInput.bind(this);
     this.handleClear = this.handleClear.bind(this);
+    this.handleFormula = this.handleFormula.bind(this);
   }
 
   //Logic for display
   handleInput(x) {
+    //console.log(letters.test(this.state.formula));
+    //console.log(operators.test(x));
+    //console.log(operators.test(this.state.display));
+    //Checks if part of the formula is complete and the display needs to be reset
+    if (operators.test(this.state.display) && operators.test(/[0-9]/)) {
+      console.log("Calling handleFormula()");
+      this.handleFormula(this.state.display);
+      this.setState({ display: "0" });
+    }
     //Doesn't allow for multiple starting 0s
-    if (this.state.display === 0 && x === "0") {
+    else if (this.state.display === "0" && x === "0") {
       this.setState({ display: "0" });
       return;
     }
@@ -43,15 +55,30 @@ class App extends Component {
     }
   }
 
+  //Clears the display and formula fields
   handleClear() {
     this.setState({ display: "0", formula: "0" });
     return;
   }
 
+  //Moves the numbers and operators from the display to the formula box
   handleFormula(y) {
-    this.setState({ formula: `{$formula} {y}` });
+    console.log("handleFormula() called");
+    if (letters.test(this.state.formula)) {
+      console.log("Non-numbers cleared");
+      this.setState({ formula: y.replace(letterX, "*") }); //Converts x to a *
+    } else if (this.state.formula === "0") {
+      console.log("Single 0 cleared");
+      this.setState({ formula: y.replace(letterX, "*") });
+      return;
+    } else {
+      this.setState({
+        formula: this.state.formula + y.replace(letterX, "*")
+      });
+    }
   }
 
+  //The calculator
   render() {
     return (
       <React.Fragment>
