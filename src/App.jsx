@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-const operators = /[+\-x/]/g;
+const operators = /[+\-x*/]/g;
 const letters = /[a-z]/i;
 const letterX = /x/gi;
+const incomplete = /$[+\-/*]/;
 
 class App extends Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class App extends Component {
     this.handleInput = this.handleInput.bind(this);
     this.handleClear = this.handleClear.bind(this);
     this.handleFormula = this.handleFormula.bind(this);
+    this.evalForm = this.evalForm.bind(this);
   }
 
   //Logic for display
@@ -26,10 +28,10 @@ class App extends Component {
     //console.log(operators.test(x));
     //console.log(operators.test(this.state.display));
     //Checks if part of the formula is complete and the display needs to be reset
-    if (operators.test(this.state.display) && operators.test(/[0-9]/)) {
+    if (operators.test(this.state.display) && operators.test(/[0-9]\./)) {
       console.log("Calling handleFormula()");
       this.handleFormula(this.state.display);
-      this.setState({ display: "0" });
+      this.setState({ display: x });
     }
     //Doesn't allow for multiple starting 0s
     else if (this.state.display === "0" && x === "0") {
@@ -45,7 +47,7 @@ class App extends Component {
       this.setState({ display: x });
     }
     //Doesn't allow for consecutive decimals
-    else if (this.state.display.match(/\.{1,}/g) && x == ".") {
+    else if (this.state.display.match(/\.{1,}/g) && x === ".") {
       return;
     }
     //Otherwise concat x to the string
@@ -72,9 +74,26 @@ class App extends Component {
       this.setState({ formula: y.replace(letterX, "*") });
       return;
     } else {
+      console.log("Concatenating");
       this.setState({
         formula: this.state.formula + y.replace(letterX, "*")
       });
+    }
+    return;
+  }
+
+  evalForm() {
+    if (this.state.formula === "0" || this.state.formula === "Push a button") {
+      this.setState({ formula: "0", display: "0" });
+      return;
+    } else if (incomplete.test(this.state.display)) {
+      console.log("You must finish the expression to evaluate it");
+      return;
+    } else {
+      let value = eval(this.state.formula + this.state.display).toString();
+      //console.log(value);
+      this.setState({ display: value, formula: "0" });
+      return;
     }
   }
 
@@ -216,7 +235,11 @@ class App extends Component {
             >
               .
             </button>
-            <button id="equals" className="col-3 btn btn-primary">
+            <button
+              id="equals"
+              className="col-3 btn btn-primary"
+              onClick={() => this.evalForm()}
+            >
               =
             </button>
           </div>
