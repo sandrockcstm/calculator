@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import ReactFCCtest from "react-fcctest";
+import Button from "./components/Button.jsx";
 
 const operators = /[+\-x*/]/g;
 const letters = /[a-z]/i;
@@ -25,15 +26,15 @@ class App extends Component {
 
   //Logic for display
   handleInput(x) {
-    console.log(
-      "Result of test of display for operators is " +
-        operators.test(this.state.display) +
-        ". Display is " +
-        this.state.display
-    );
-    console.log(
-      "Result of test of x for operators is " + operators.test(x) + ". x = " + x
-    );
+    // console.log(
+    //   "Result of test of display for operators is " +
+    //     operators.test(this.state.display) +
+    //     ". Display is " +
+    //     this.state.display
+    // );
+    // console.log(
+    //   "Result of test of x for operators is " + operators.test(x) + ". x = " + x
+    // );
 
     //Checks if part of the formula is complete and the display needs to be reset
     if (
@@ -81,6 +82,7 @@ class App extends Component {
 
   //Clears the display and formula fields
   handleClear() {
+    console.log("handleClear called");
     this.setState({ display: "0", formula: "0" });
     return;
   }
@@ -141,13 +143,19 @@ class App extends Component {
           </div>
 
           <div className="row">
-            <button
+            <Button
+              id="clear"
+              className="col-9 btn btn-danger"
+              onClick={this.handleClear}
+              text="C"
+            />
+            {/* <button
               id="clear"
               className="col-9 btn btn-danger"
               onClick={() => this.handleClear()}
             >
               C
-            </button>
+            </button> */}
             <button
               id="divide"
               className="col-3 btn btn-primary"
