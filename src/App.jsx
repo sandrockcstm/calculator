@@ -52,11 +52,11 @@ class App extends Component {
       this.setState({ display: "0" });
       return;
     }
-    //Changes consecutive operators to only the newest
-    else if (operators.test(this.state.display) && operators.test(x)) {
-      console.log("Only one operator allowed");
-      this.setState({ display: this.state.display.replace(operators, x) });
-    }
+    // //Changes consecutive operators to only the newest
+    // else if (operators.test(this.state.display) && operators.test(x)) {
+    //   console.log("Only one operator allowed");
+    //   this.setState({ display: this.state.display.replace(operators, x) });
+    // }
     //Allows for operators to follow a zero
     else if (operators.test(x) && this.state.display.match()) {
       console.log("Adding operator after 0");
