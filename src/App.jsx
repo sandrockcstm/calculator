@@ -37,11 +37,7 @@ class App extends Component {
     // );
 
     //Checks if part of the formula is complete and the display needs to be reset
-    if (
-      operators.test(this.state.display) &&
-      operators.test(/[0-9]\./) &&
-      operators.test(x)
-    ) {
+    if (operators.test(this.state.display) && operators.test(/[0-9]\./)) {
       console.log("Calling handleFormula()");
       this.handleFormula(this.state.display);
       this.setState({ display: x });
@@ -156,126 +152,222 @@ class App extends Component {
             >
               C
             </button> */}
-            <button
+            <Button
+              id="divide"
+              className="col-3 btn btn-primary"
+              onClick={() => this.handleInput("/")}
+              text="/"
+            />
+            {/* <button
               id="divide"
               className="col-3 btn btn-primary"
               onClick={() => this.handleInput("/")}
             >
               /
-            </button>
+            </button> */}
           </div>
           <div className="row">
-            <button
+            <Button
+              id="seven"
+              className="col-3 btn btn-secondary"
+              onClick={() => this.handleInput("7")}
+              text="7"
+            />
+            {/* <button
               id="seven"
               className="col-3 btn btn-secondary"
               onClick={() => this.handleInput("7")}
             >
               7
-            </button>
-            <button
+            </button> */}
+            <Button
+              id="eight"
+              className="col-3 btn btn-secondary"
+              onClick={() => this.handleInput("8")}
+              text="8"
+            />
+            {/* <button
               id="eight"
               className="col-3 btn btn-secondary"
               onClick={() => this.handleInput("8")}
             >
               8
-            </button>
-            <button
+            </button> */}
+            <Button
+              id="nine"
+              className="col-3 btn btn-secondary"
+              onClick={() => this.handleInput("9")}
+              text="9"
+            />
+            {/* <button
               id="nine"
               className="col-3 btn btn-secondary"
               onClick={() => this.handleInput("9")}
             >
               9
-            </button>
-            <button
+            </button> */}
+            <Button
+              id="multiply"
+              className="col-3 btn btn-primary"
+              onClick={() => this.handleInput("x")}
+              text="x"
+            />
+            {/* <button
               id="multiply"
               className="col-3 btn btn-primary"
               onClick={() => this.handleInput("x")}
             >
               x
-            </button>
+            </button> */}
           </div>
           <div className="row">
-            <button
+            <Button
+              id="four"
+              className="col-3 btn btn-secondary"
+              onClick={() => this.handleInput("4")}
+              text="4"
+            />
+            {/* <button
               id="four"
               className="col-3 btn btn-secondary"
               onClick={() => this.handleInput("4")}
             >
               4
-            </button>
-            <button
+            </button> */}
+            <Button
+              id="five"
+              className="col-3 btn btn-secondary"
+              onClick={() => this.handleInput("5")}
+              text="5"
+            />
+            {/* <button
               id="five"
               className="col-3 btn btn-secondary"
               onClick={() => this.handleInput("5")}
             >
               5
-            </button>
-            <button
+            </button> */}
+            <Button
+              id="six"
+              className="col-3 btn btn-secondary"
+              onClick={() => this.handleInput("6")}
+              text="6"
+            />
+            {/* <button
               id="six"
               className="col-3 btn btn-secondary"
               onClick={() => this.handleInput("6")}
             >
               6
-            </button>
-            <button
+            </button> */}
+            <Button
+              id="subtract"
+              className="col-3 btn btn-primary"
+              onClick={() => this.handleInput("-")}
+              text="-"
+            />
+            {/* <button
               id="subtract"
               className="col-3 btn btn-primary"
               onClick={() => this.handleInput("-")}
             >
               -
-            </button>
+            </button> */}
           </div>
           <div className="row">
-            <button
+            <Button
+              id="one"
+              className="col-3 btn btn-secondary"
+              onClick={() => this.handleInput("1")}
+              text="1"
+            />
+            {/* <button
               id="one"
               className="col-3 btn btn-secondary"
               onClick={() => this.handleInput("1")}
             >
               1
-            </button>
-            <button
+            </button> */}
+            <Button
+              id="two"
+              className="col-3 btn btn-secondary"
+              onClick={() => this.handleInput("2")}
+              text="2"
+            />
+            {/* <button
               id="two"
               className="col-3 btn btn-secondary"
               onClick={() => this.handleInput("2")}
             >
               2
-            </button>
-            <button
+            </button> */}
+            <Button
+              id="three"
+              className="col-3 btn btn-secondary"
+              onClick={() => this.handleInput("3")}
+              text="3"
+            />
+            {/* <button
               id="three"
               className="col-3 btn btn-secondary"
               onClick={() => this.handleInput("3")}
             >
               3
-            </button>
-            <button
+            </button> */}
+            <Button
+              id="add"
+              className="col-3 btn btn-primary"
+              onClick={() => this.handleInput("+")}
+              text="+"
+            />
+            {/* <button
               id="add"
               className="col-3 btn btn-primary"
               onClick={() => this.handleInput("+")}
             >
               +
-            </button>
+            </button> */}
           </div>
           <div className="row">
-            <button
+            <Button
+              id="zero"
+              className="col-6 btn btn-secondary"
+              onClick={() => this.handleInput("0")}
+              text="0"
+            />
+            {/* <button
               id="zero"
               className="col-6 btn btn-secondary"
               onClick={() => this.handleInput("0")}
             >
               0
-            </button>
-            <button
+            </button> */}
+            <Button
+              id="decimal"
+              className="col-3 btn btn-secondary"
+              onClick={() => this.handleInput(".")}
+              text="."
+            />
+            {/* <button
               id="decimal"
               className="col-3 btn btn-secondary"
               onClick={() => this.handleInput(".")}
             >
               .
-            </button>
-            <button
+            </button> */}
+            <Button
+              id="equals"
+              className="col-3 btn btn-primary"
+              onClick={() => this.evalForm()}
+              text="="
+            />
+            {/* <button
               id="equals"
               className="col-3 btn btn-primary"
               onClick={() => this.evalForm()}
             >
               =
-            </button>
+            </button> */}
           </div>
         </div>
         <div className="col-md-6" />
