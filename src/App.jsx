@@ -3,6 +3,8 @@ import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import ReactFCCtest from "react-fcctest";
 import Button from "./components/Button.jsx";
+import FormulaBox from "./components/FormulaBox.jsx";
+import Display from "./components/Display.jsx";
 
 const operators = /[+\-x*/]/g;
 const letters = /[a-z]/i;
@@ -128,14 +130,24 @@ class App extends Component {
         <div className="col-md-6" />
         <div className="container col-md-3">
           <div className="row">
-            <div id="formula" className="container-fluid">
+            <FormulaBox
+              id="formula"
+              className="container-fluid"
+              formula={this.state.formula}
+            />
+            {/* <div id="formula" className="container-fluid">
               {this.state.formula}
-            </div>
+            </div> */}
           </div>
           <div className="row">
-            <div id="display" className="container-fluid">
+            <Display
+              id="display"
+              className="container-fluid"
+              display={this.state.display}
+            />
+            {/* <div id="display" className="container-fluid">
               {this.state.display}
-            </div>
+            </div> */}
           </div>
 
           <div className="row">
